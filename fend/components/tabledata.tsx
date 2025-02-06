@@ -39,7 +39,7 @@ const Users = () => {
             <td className="px-3 py-6 text-black">{rs.email}</td>
             <td className="px-3 py-6 text-black">{rs.created_at}</td>
             <td className="flex justify-center gap-1 py-3">
-              <Link href="#" className="btn btn-info">
+              <Link href={`/user/view/${rs.id}`} className="btn btn-info">
                 View
               </Link>
               <Link href="#" className="btn btn-primary">
