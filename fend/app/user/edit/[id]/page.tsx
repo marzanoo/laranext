@@ -50,7 +50,7 @@ const EditUserPage = () => {
   return (
     <div className="max-w-md mx-auto mt-5">
       <h1 className="text-2xl text-center mb-2">Edit User</h1>
-      <form action="">
+      <form action="" onSubmit={onSubmitChange}>
         <div className="mb-3 mt-3">
           <label className="block text-sm font-medium text-white">
             ID: {id}
@@ -96,11 +96,7 @@ const EditUserPage = () => {
             onChange={changeUserFieldHandler}
           />
         </div>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={onSubmitChange}
-        >
+        <button type="submit" className="btn btn-primary">
           Save
         </button>
       </form>

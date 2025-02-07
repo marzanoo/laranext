@@ -20,6 +20,18 @@ const Users = () => {
     }
   };
 
+  const handleDelete = async (id: any) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/usersdelete/${id}`);
+      const newUserData = userData.filter((item: any) => {
+        return item.id !== id;
+      });
+      setUserData(newUserData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <table className="table table-zebra">
       <thead className="text-sm text-gray-700 uppercase bg-gray-50">
@@ -45,9 +57,12 @@ const Users = () => {
               <Link href={`/user/edit/${rs.id}`} className="btn btn-primary">
                 Edit
               </Link>
-              <Link href="#" className="btn btn-secondary">
+              <button
+                className="btn btn-error"
+                onClick={() => handleDelete(rs.id)}
+              >
                 Delete
-              </Link>
+              </button>
             </td>
           </tr>
         ))}

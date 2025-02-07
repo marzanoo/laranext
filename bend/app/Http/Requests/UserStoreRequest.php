@@ -24,13 +24,13 @@ class UserStoreRequest extends FormRequest
         if (request()->isMethod('POST')) {
             return [
                 'name' => 'required|string|max:255',
-                'email' => 'required|string',
+                'email' => 'required|string|email|unique:users',
                 'password' => 'required|string',
             ];
         } else {
             return [
                 'name' => 'required|string|max:255',
-                'email' => 'required|string',
+                'email' => 'required|string|email',
                 'password' => 'required|string',
             ];
         }
