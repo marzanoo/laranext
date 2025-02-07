@@ -7,10 +7,9 @@ type InputProps = {
   onChange?: any;
   value?: string;
   name: string;
-  ref?: any;
 };
 
-const Input = forwardRef((props: InputProps, ref) => {
+const Input = forwardRef((props: InputProps, ref: any) => {
   const {
     ClassName = "input input-bordered input-primary w-full max-w-xs",
     type,

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "./elements/Button";
 
-const Users = () => {
+const DataTable = () => {
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     fetchdata();
@@ -66,4 +66,4 @@ const Users = () => {
     </table>
   );
 };
-export default Users;
+export default DataTable;

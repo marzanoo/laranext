@@ -11,32 +11,26 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        // Validasi input
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+        $credentials = $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|min:6',
         ]);
-
-        // Coba cari user berdasarkan email
-        $user = User::where('email', $request->email)->first();
-
-        // Jika user tidak ditemukan
-        if (!$user) {
-            return response()->json([
-                'message' => 'User not found'
-            ], 404);
+    
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate(); // Regenerasi session
+            return response()->json(['message' => 'Login berhasil', 'user' => Auth::user()], 200);
         }
+    
+        return response()->json(['message' => 'Login gagal, periksa kembali email & password'], 401);
+    }
 
-        // Verifikasi password secara manual
-        if (!Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => 'Invalid credentials'
-            ], 401);
-        }
-
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return response()->json([
-            'message' => 'Login successful',
-            'users' => $user
+            'message' => 'Logout successful'
         ], 200);
     }
 }
