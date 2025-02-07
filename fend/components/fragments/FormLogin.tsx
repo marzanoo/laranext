@@ -36,6 +36,7 @@ const FormLogin = () => {
         data
       );
       console.log("Login successful:", response.data);
+      window.location.href = "/";
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -62,7 +63,9 @@ const FormLogin = () => {
         type="password"
         placeholder="Password"
       />
-      <Button type="submit">Login</Button>
+      <Button type="submit" ClassName="btn bg-white text-black">
+        Login
+      </Button>
     </form>
   );
 };
