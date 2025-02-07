@@ -42,7 +42,7 @@ const Users = () => {
               <Link href={`/user/view/${rs.id}`} className="btn btn-info">
                 View
               </Link>
-              <Link href="#" className="btn btn-primary">
+              <Link href={`/user/edit/${rs.id}`} className="btn btn-primary">
                 Edit
               </Link>
               <Link href="#" className="btn btn-secondary">
