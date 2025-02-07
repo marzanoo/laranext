@@ -3,6 +3,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Button from "./elements/Button";
 
 const Users = () => {
   const [userData, setUserData] = useState([]);
@@ -57,12 +58,7 @@ const Users = () => {
               <Link href={`/user/edit/${rs.id}`} className="btn btn-primary">
                 Edit
               </Link>
-              <button
-                className="btn btn-error"
-                onClick={() => handleDelete(rs.id)}
-              >
-                Delete
-              </button>
+              <Button onClick={() => handleDelete(rs.id)}>Delete</Button>
             </td>
           </tr>
         ))}

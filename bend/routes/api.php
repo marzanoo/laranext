@@ -15,5 +15,5 @@ Route::put('usersupdate/{id}', [UserController::class, 'update']);
 Route::post('addnew', [UserController::class, 'store']);
 Route::delete('usersdelete/{id}', [UserController::class, 'destroy']);
 
-Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:web');
