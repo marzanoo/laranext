@@ -1,4 +1,12 @@
+"use client";
+
+import RegisterView from "@/views/Register";
+
 const RegisterPage = () => {
-  return <div>RegisterPage</div>;
+  return (
+    <>
+      <RegisterView />
+    </>
+  );
 };
 export default RegisterPage;
