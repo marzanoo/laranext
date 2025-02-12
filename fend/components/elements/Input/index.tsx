@@ -1,13 +1,21 @@
+/* eslint-disable react/display-name */
 import Label from "./Label";
 import Input from "./Input";
 import { forwardRef } from "react";
 
 const InputForm = forwardRef((props: any, ref: any) => {
-  const { label, name, type, placeholder } = props;
+  const { label, name, type, placeholder, onChange, value } = props; // Tambahkan onChange & value
   return (
     <div className="mb-6">
       <Label htmlFor={name}>{label}</Label>
-      <Input name={name} type={type} placeholder={placeholder} ref={ref} />
+      <Input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        ref={ref}
+        onChange={onChange}
+        value={value}
+      />
     </div>
   );
 });

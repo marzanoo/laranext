@@ -1,29 +1,32 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import InputForm from "../elements/Input";
 import Button from "../elements/Button";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import API from "@/lib/api";
+import Cookies from "js-cookie";
 
 const FormLogin = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
-  const handlerLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = {
-      email: (e.currentTarget.email as HTMLInputElement).value,
-      password: (e.currentTarget.password as HTMLInputElement).value,
-    };
+  const [form, setForm] = useState({ email: "", password: "" });
+  const router = useRouter();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/login",
-        data
-      );
-      console.log("Login successful:", response.data);
-      window.location.href = "/";
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await API.post("/login", form);
+      Cookies.set("token", response.data.access_token, { expires: 1 });
+      router.push("/");
+    } catch (error) {
+      console.log("Login Failed", error);
+    }
+  };
   useEffect(() => {
     if (emailRef.current) {
       emailRef.current.focus();
@@ -31,19 +34,21 @@ const FormLogin = () => {
   }, []);
 
   return (
-    <form onSubmit={handlerLogin}>
+    <form onSubmit={handleLogin}>
       <InputForm
         label="Email"
         name="email"
         type="email"
         placeholder="Email"
         ref={emailRef}
+        onChange={handleChange}
       />
       <InputForm
         label="Password"
         name="password"
         type="password"
         placeholder="Password"
+        onChange={handleChange}
       />
       <Button type="submit" ClassName="btn bg-white text-black">
         Login

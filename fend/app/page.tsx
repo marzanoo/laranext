@@ -7,21 +7,21 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
+import { useLogin } from "./hooks/useLogin";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const router = useRouter();
+  const { isLoading } = useLogin();
+
+  if (isLoading) return null;
 
   const logoutHandler = async () => {
     try {
-      await axios.post(
-        "http://localhost:8000/api/logout", // Endpoint logout di Laravel
-        {},
-        { withCredentials: true } // Ini penting untuk session
-      );
-
-      router.push("/auth/login"); // Redirect setelah logout
+      Cookies.remove("token");
+      router.push("/auth/login");
     } catch (error) {
-      console.error("Logout gagal:", error);
+      console.log(error);
     }
   };
 
@@ -40,14 +40,7 @@ export default function Home() {
           <DataTable />
         </Suspense>
       </div>
-      <Button
-        type="submit"
-        onClick={() => {
-          logoutHandler;
-        }}
-      >
-        Logout
-      </Button>
+      <Button onClick={logoutHandler}>Logout</Button>
     </div>
   );
 }

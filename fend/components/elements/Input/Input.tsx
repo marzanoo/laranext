@@ -1,10 +1,11 @@
+/* eslint-disable react/display-name */
 import { forwardRef } from "react";
 
 type InputProps = {
   ClassName?: string;
   type?: string;
   placeholder?: string;
-  onChange?: any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   name: string;
 };
