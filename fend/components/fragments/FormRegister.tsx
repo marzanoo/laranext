@@ -24,7 +24,6 @@ const FormRegister = () => {
     e.preventDefault();
     try {
       const response = await API.post("/register", form);
-      Cookies.set("token", response.data.access_token, { expires: 1 });
       router.push("/auth/login");
     } catch (error) {
       console.log("Register Failed", error);
@@ -54,7 +53,9 @@ const FormRegister = () => {
         onChange={handleChange}
         placeholder="Password"
       />
-      <Button type="submit">Register</Button>
+      <Button type="submit" ClassName="btn bg-white text-black">
+        Register
+      </Button>
     </form>
   );
 };
