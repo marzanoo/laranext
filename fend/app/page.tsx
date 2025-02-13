@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import { useLogin } from "./hooks/useLogin";
 import Cookies from "js-cookie";
+import Navbar from "@/components/layouts/Navbar";
 
 export default function Home() {
   const router = useRouter();
@@ -26,21 +27,26 @@ export default function Home() {
   };
 
   return (
-    <div className="w-screen py-20 flex justify-center flex-col items-center">
-      <div className="flex items-center justify_between gap-1 mb-5">
-        <h1 className="text-4xl font bold">Next.js 14 Laravel 11 CRUD Mysql</h1>
-      </div>
-      <div className="overflow-x-auto">
-        <div className="mb-2 w-full text-right">
-          <Link href="/user/create" className="btn btn-primary">
-            Create
-          </Link>
+    <>
+      <Navbar />
+      <div className="w-screen py-20 flex justify-center flex-col items-center">
+        <div className="flex items-center justify_between gap-1 mb-5">
+          <h1 className="text-4xl font bold">
+            Next.js 14 Laravel 11 CRUD Mysql
+          </h1>
         </div>
-        <Suspense fallback={<Spinner />}>
-          <DataTable />
-        </Suspense>
+        <div className="overflow-x-auto">
+          <div className="mb-2 w-full text-right">
+            <Link href="/user/create" className="btn btn-primary">
+              Create
+            </Link>
+          </div>
+          <Suspense fallback={<Spinner />}>
+            <DataTable />
+          </Suspense>
+        </div>
+        <Button onClick={logoutHandler}>Logout</Button>
       </div>
-      <Button onClick={logoutHandler}>Logout</Button>
-    </div>
+    </>
   );
 }
